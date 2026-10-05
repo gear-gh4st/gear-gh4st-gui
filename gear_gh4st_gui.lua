@@ -8,7 +8,6 @@ local TextButton_4 = Instance.new("TextButton")
 local TextButton_5 = Instance.new("TextButton")
 local TextButton_6 = Instance.new("TextButton")
 local TextButton_8 = Instance.new("TextButton")
-local TextButton_9 = Instance.new("TextButton")
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -124,20 +123,7 @@ TextButton_8.TextScaled = true
 TextButton_8.TextSize = 14.000
 TextButton_8.TextWrapped = true
 
-TextButton_9.Parent = Frame
-TextButton_9.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-TextButton_9.BorderColor3 = Color3.fromRGB(80, 80, 80)
-TextButton_9.BorderSizePixel = 2
-TextButton_9.Position = UDim2.new(0.5, 0, 0.66, 0)
-TextButton_9.Size = UDim2.new(0, 170, 0, 50)
-TextButton_9.Font = Enum.Font.SourceSans
-TextButton_9.Text = "audio logger"
-TextButton_9.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_9.TextScaled = true
-TextButton_9.TextSize = 14.000
-TextButton_9.TextWrapped = true
-
--- Scripts (остались те же)
+-- Scripts
 local function KRPNVHZ_fake_script()
     local script = Instance.new('LocalScript', TextButton)
     script.Parent.MouseButton1Click:Connect(function()
@@ -194,25 +180,41 @@ local function MALDYEG_fake_script()
 end
 coroutine.wrap(MALDYEG_fake_script)()
 
-local function ZENIE_fake_script()
-    local script = Instance.new('LocalScript', TextButton_9)
-    script.Parent.MouseButton1Click:Connect(function()
-        -- audio logger код остался тот же
-        aa = game:GetObjects("rbxassetid://01997056190")[1]
-        aa.Parent = game.CoreGui
-        wait(0.2)
-        GUI = aa.PopupFrame.PopupFrame
-        pos = 0
-        -- ... (весь остальной код audio logger как был)
-    end)
-end
-coroutine.wrap(ZENIE_fake_script)()
-
 local function DSVXDC_fake_script()
     local script = Instance.new('LocalScript', Frame)
     local UIS = game:GetService("UserInputService")
     function dragify(Frame)
-        -- drag код как был
+        local dragToggle = nil
+        local dragSpeed = 0.25
+        local dragStart = nil
+        local startPos = nil
+
+        local function updateInput(input)
+            local Delta = input.Position - dragStart
+            local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+            game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.1), {Position = Position}):Play()
+        end
+
+        Frame.InputBegan:Connect(function(input)
+            if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
+                dragToggle = true
+                dragStart = input.Position
+                startPos = Frame.Position
+                input.Changed:Connect(function()
+                    if input.UserInputState == Enum.UserInputState.End then
+                        dragToggle = false
+                    end
+                end)
+            end
+        end)
+
+        Frame.InputChanged:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+                if dragToggle then
+                    updateInput(input)
+                end
+            end
+        end)
     end
     dragify(script.Parent)
 end
