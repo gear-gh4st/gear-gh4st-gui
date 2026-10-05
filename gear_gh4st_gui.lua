@@ -1,221 +1,144 @@
+-- Simple Mobile + PC Hub (работает на Delta)
+
+local Players = game:GetService("Players")
+local UIS = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local LocalPlayer = Players.LocalPlayer
+
 local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local TextLabel_2 = Instance.new("TextLabel")
-local TextButton = Instance.new("TextButton")
-local TextButton_2 = Instance.new("TextButton")
-local TextButton_3 = Instance.new("TextButton")
-local TextButton_4 = Instance.new("TextButton")
-local TextButton_5 = Instance.new("TextButton")
-local TextButton_6 = Instance.new("TextButton")
-local TextButton_8 = Instance.new("TextButton")
-
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.Name = "SimpleHub"
+ScreenGui.ResetOnSpawn = false
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
 
-Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+local Frame = Instance.new("Frame")
+Frame.Name = "Main"
+Frame.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
 Frame.BorderSizePixel = 0
-Frame.Position = UDim2.new(0.0284090899, 0, 0.0525067747, 0)
-Frame.Size = UDim2.new(0, 376, 0, 270)
+Frame.Position = UDim2.new(0.05, 0, 0.15, 0)
+Frame.Size = UDim2.new(0, 340, 0, 310)
+Frame.Active = true
+Frame.Parent = ScreenGui
 
-TextLabel_2.Parent = Frame
-TextLabel_2.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_2.BorderSizePixel = 0
-TextLabel_2.Position = UDim2.new(0, 0, 0, 0)
-TextLabel_2.Size = UDim2.new(0, 376, 0, 40)
-TextLabel_2.Font = Enum.Font.SourceSans
-TextLabel_2.Text = "by @gear_gh4st on youtube"
-TextLabel_2.TextColor3 = Color3.fromRGB(200, 200, 200)
-TextLabel_2.TextScaled = true
-TextLabel_2.TextSize = 14.000
-TextLabel_2.TextWrapped = true
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 10)
+UICorner.Parent = Frame
 
-TextButton.Parent = Frame
-TextButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-TextButton.BorderColor3 = Color3.fromRGB(80, 80, 80)
-TextButton.BorderSizePixel = 2
-TextButton.Position = UDim2.new(0.0186170209, 0, 0.18, 0)
-TextButton.Size = UDim2.new(0, 97, 0, 50)
-TextButton.Font = Enum.Font.SourceSans
-TextButton.Text = "scripthub new ui"
-TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextButton.TextScaled = true
-TextButton.TextSize = 14.000
-TextButton.TextWrapped = true
+-- Заголовок
+local Title = Instance.new("TextLabel")
+Title.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Title.Size = UDim2.new(1, 0, 0, 38)
+Title.Font = Enum.Font.GothamBold
+Title.Text = "by @gear_gh4st"
+Title.TextColor3 = Color3.fromRGB(220, 220, 220)
+Title.TextSize = 16
+Title.Parent = Frame
 
-TextButton_2.Parent = Frame
-TextButton_2.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-TextButton_2.BorderColor3 = Color3.fromRGB(80, 80, 80)
-TextButton_2.BorderSizePixel = 2
-TextButton_2.Position = UDim2.new(0.31117022, 0, 0.18, 0)
-TextButton_2.Size = UDim2.new(0, 104, 0, 50)
-TextButton_2.Font = Enum.Font.SourceSans
-TextButton_2.Text = "scripthub old ui"
-TextButton_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_2.TextScaled = true
-TextButton_2.TextSize = 14.000
-TextButton_2.TextWrapped = true
+local TitleCorner = Instance.new("UICorner")
+TitleCorner.CornerRadius = UDim.new(0, 10)
+TitleCorner.Parent = Title
 
-TextButton_3.Parent = Frame
-TextButton_3.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-TextButton_3.BorderColor3 = Color3.fromRGB(80, 80, 80)
-TextButton_3.BorderSizePixel = 2
-TextButton_3.Position = UDim2.new(0.630319178, 0, 0.18, 0)
-TextButton_3.Size = UDim2.new(0, 120, 0, 50)
-TextButton_3.Font = Enum.Font.SourceSans
-TextButton_3.Text = "comet"
-TextButton_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_3.TextScaled = true
-TextButton_3.TextSize = 14.000
-TextButton_3.TextWrapped = true
+-- Кнопка закрытия
+local CloseBtn = Instance.new("TextButton")
+CloseBtn.Size = UDim2.new(0, 38, 0, 38)
+CloseBtn.Position = UDim2.new(1, -38, 0, 0)
+CloseBtn.BackgroundColor3 = Color3.fromRGB(180, 50, 50)
+CloseBtn.Text = "X"
+CloseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseBtn.Font = Enum.Font.GothamBold
+CloseBtn.TextSize = 18
+CloseBtn.Parent = Frame
 
-TextButton_4.Parent = Frame
-TextButton_4.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-TextButton_4.BorderColor3 = Color3.fromRGB(80, 80, 80)
-TextButton_4.BorderSizePixel = 2
-TextButton_4.Position = UDim2.new(0.0186170209, 0, 0.42, 0)
-TextButton_4.Size = UDim2.new(0, 97, 0, 50)
-TextButton_4.Font = Enum.Font.SourceSans
-TextButton_4.Text = "inf yield admin"
-TextButton_4.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_4.TextScaled = true
-TextButton_4.TextSize = 14.000
-TextButton_4.TextWrapped = true
+local CloseCorner = Instance.new("UICorner")
+CloseCorner.CornerRadius = UDim.new(0, 10)
+CloseCorner.Parent = CloseBtn
 
-TextButton_5.Parent = Frame
-TextButton_5.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-TextButton_5.BorderColor3 = Color3.fromRGB(80, 80, 80)
-TextButton_5.BorderSizePixel = 2
-TextButton_5.Position = UDim2.new(0.31117022, 0, 0.42, 0)
-TextButton_5.Size = UDim2.new(0, 104, 0, 50)
-TextButton_5.Font = Enum.Font.SourceSans
-TextButton_5.Text = "fates admin"
-TextButton_5.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_5.TextScaled = true
-TextButton_5.TextSize = 14.000
-TextButton_5.TextWrapped = true
+CloseBtn.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
 
-TextButton_6.Parent = Frame
-TextButton_6.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-TextButton_6.BorderColor3 = Color3.fromRGB(80, 80, 80)
-TextButton_6.BorderSizePixel = 2
-TextButton_6.Position = UDim2.new(0.630319178, 0, 0.42, 0)
-TextButton_6.Size = UDim2.new(0, 120, 0, 50)
-TextButton_6.Font = Enum.Font.SourceSans
-TextButton_6.Text = "dex++"
-TextButton_6.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_6.TextScaled = true
-TextButton_6.TextSize = 14.000
-TextButton_6.TextWrapped = true
+-- Функция создания кнопок
+local function createButton(text, pos, size, callback)
+    local btn = Instance.new("TextButton")
+    btn.Size = size
+    btn.Position = pos
+    btn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    btn.BorderSizePixel = 0
+    btn.Font = Enum.Font.Gotham
+    btn.Text = text
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.TextSize = 15
+    btn.TextWrapped = true
+    btn.Parent = Frame
 
-TextButton_8.Parent = Frame
-TextButton_8.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-TextButton_8.BorderColor3 = Color3.fromRGB(80, 80, 80)
-TextButton_8.BorderSizePixel = 2
-TextButton_8.Position = UDim2.new(0.0186170209, 0, 0.66, 0)
-TextButton_8.Size = UDim2.new(0, 170, 0, 50)
-TextButton_8.Font = Enum.Font.SourceSans
-TextButton_8.Text = "cmd admin"
-TextButton_8.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_8.TextScaled = true
-TextButton_8.TextSize = 14.000
-TextButton_8.TextWrapped = true
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 8)
+    corner.Parent = btn
 
--- Scripts
-local function KRPNVHZ_fake_script()
-    local script = Instance.new('LocalScript', TextButton)
-    script.Parent.MouseButton1Click:Connect(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/ScriptHubNA.lua"))()
-    end)
+    btn.MouseButton1Click:Connect(callback)
+    return btn
 end
-coroutine.wrap(KRPNVHZ_fake_script)()
 
-local function FBDCD_fake_script()
-    local script = Instance.new('LocalScript', TextButton_2)
-    script.Parent.MouseButton1Click:Connect(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/ScriptHub"))()
-    end)
-end
-coroutine.wrap(FBDCD_fake_script)()
+-- Кнопки
+createButton("ScriptHub New UI", UDim2.new(0.04, 0, 0.16, 0), UDim2.new(0, 150, 0, 48), function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/ScriptHubNA.lua"))()
+end)
 
-local function YKXUI_fake_script()
-    local script = Instance.new('LocalScript', TextButton_3)
-    script.Parent.MouseButton1Click:Connect(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/comet"))()
-    end)
-end
-coroutine.wrap(YKXUI_fake_script)()
+createButton("ScriptHub Old UI", UDim2.new(0.52, 0, 0.16, 0), UDim2.new(0, 150, 0, 48), function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/ScriptHub"))()
+end)
 
-local function SJQRYWC_fake_script()
-    local script = Instance.new('LocalScript', TextButton_4)
-    script.Parent.MouseButton1Click:Connect(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-    end)
-end
-coroutine.wrap(SJQRYWC_fake_script)()
+createButton("Comet", UDim2.new(0.04, 0, 0.35, 0), UDim2.new(0, 150, 0, 48), function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/comet"))()
+end)
 
-local function AQTMOP_fake_script()
-    local script = Instance.new('LocalScript', TextButton_5)
-    script.Parent.MouseButton1Click:Connect(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"))();
-    end)
-end
-coroutine.wrap(AQTMOP_fake_script)()
+createButton("Infinite Yield", UDim2.new(0.52, 0, 0.35, 0), UDim2.new(0, 150, 0, 48), function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+end)
 
-local function BAJGF_fake_script()
-    local script = Instance.new('LocalScript', TextButton_6)
-    script.Parent.MouseButton1Click:Connect(function()
-        loadstring(game:HttpGet("https://github.com/AZYsGithub/DexPlusPlus/releases/download/stable-3.0/out.lua"))()
-    end)
-end
-coroutine.wrap(BAJGF_fake_script)()
+createButton("Fates Admin", UDim2.new(0.04, 0, 0.54, 0), UDim2.new(0, 150, 0, 48), function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"))()
+end)
 
-local function MALDYEG_fake_script()
-    local script = Instance.new('LocalScript', TextButton_8)
-    script.Parent.MouseButton1Click:Connect(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/lxte/cmd/main/main.lua"))()
-    end)
-end
-coroutine.wrap(MALDYEG_fake_script)()
+createButton("Dex++", UDim2.new(0.52, 0, 0.54, 0), UDim2.new(0, 150, 0, 48), function()
+    loadstring(game:HttpGet("https://github.com/AZYsGithub/DexPlusPlus/releases/download/stable-3.0/out.lua"))()
+end)
 
-local function DSVXDC_fake_script()
-    local script = Instance.new('LocalScript', Frame)
-    local UIS = game:GetService("UserInputService")
-    function dragify(Frame)
-        local dragToggle = nil
-        local dragSpeed = 0.25
-        local dragStart = nil
-        local startPos = nil
+createButton("CMD Admin", UDim2.new(0.04, 0, 0.73, 0), UDim2.new(0, 310, 0, 48), function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/lxte/cmd/main/main.lua"))()
+end)
 
-        local function updateInput(input)
-            local Delta = input.Position - dragStart
-            local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
-            game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.1), {Position = Position}):Play()
-        end
+-- Перетаскивание (работает и на ПК, и на телефоне)
+local dragging = false
+local dragStart = nil
+local startPos = nil
 
-        Frame.InputBegan:Connect(function(input)
-            if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
-                dragToggle = true
-                dragStart = input.Position
-                startPos = Frame.Position
-                input.Changed:Connect(function()
-                    if input.UserInputState == Enum.UserInputState.End then
-                        dragToggle = false
-                    end
-                end)
-            end
-        end)
+Frame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = Frame.Position
 
-        Frame.InputChanged:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-                if dragToggle then
-                    updateInput(input)
-                end
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
             end
         end)
     end
-    dragify(script.Parent)
-end
-coroutine.wrap(DSVXDC_fake_script)()
+end)
+
+Frame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        if dragging then
+            local delta = input.Position - dragStart
+            Frame.Position = UDim2.new(
+                startPos.X.Scale,
+                startPos.X.Offset + delta.X,
+                startPos.Y.Scale,
+                startPos.Y.Offset + delta.Y
+            )
+        end
+    end
+end)
+
+print("Simple Hub загружен (Mobile + PC)")
