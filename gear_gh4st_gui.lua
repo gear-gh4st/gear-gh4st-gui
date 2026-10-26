@@ -1,4 +1,3 @@
--- Simple Mobile + PC Hub (работает на Delta)
 
 local Players = game:GetService("Players")
 local UIS = game:GetService("UserInputService")
@@ -24,7 +23,6 @@ local UICorner = Instance.new("UICorner")
 UICorner.CornerRadius = UDim.new(0, 10)
 UICorner.Parent = Frame
 
--- Заголовок
 local Title = Instance.new("TextLabel")
 Title.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 Title.Size = UDim2.new(1, 0, 0, 38)
@@ -38,7 +36,6 @@ local TitleCorner = Instance.new("UICorner")
 TitleCorner.CornerRadius = UDim.new(0, 10)
 TitleCorner.Parent = Title
 
--- Кнопка закрытия
 local CloseBtn = Instance.new("TextButton")
 CloseBtn.Size = UDim2.new(0, 38, 0, 38)
 CloseBtn.Position = UDim2.new(1, -38, 0, 0)
@@ -57,7 +54,6 @@ CloseBtn.MouseButton1Click:Connect(function()
     ScreenGui:Destroy()
 end)
 
--- Функция создания кнопок
 local function createButton(text, pos, size, callback)
     local btn = Instance.new("TextButton")
     btn.Size = size
@@ -79,7 +75,6 @@ local function createButton(text, pos, size, callback)
     return btn
 end
 
--- Кнопки
 createButton("ScriptHub New UI", UDim2.new(0.04, 0, 0.16, 0), UDim2.new(0, 150, 0, 48), function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/ScriptHubNA.lua"))()
 end)
@@ -108,7 +103,6 @@ createButton("CMD Admin", UDim2.new(0.04, 0, 0.73, 0), UDim2.new(0, 310, 0, 48),
     loadstring(game:HttpGet("https://raw.githubusercontent.com/lxte/cmd/main/main.lua"))()
 end)
 
--- Перетаскивание (работает и на ПК, и на телефоне)
 local dragging = false
 local dragStart = nil
 local startPos = nil
@@ -140,5 +134,3 @@ Frame.InputChanged:Connect(function(input)
         end
     end
 end)
-
-print("Simple Hub загружен (Mobile + PC)")
